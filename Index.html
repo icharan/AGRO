@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBF Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-decoration: none;
+            color: black;
+            width: 200px;
+        }
+        .card img {
+            width: 80px;
+            height: 80px;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            transition: 0.2s;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>IBF Dashboard</h1>
+
+    <div class="container">
+        <a href="IbfHeatwave.html" class="card">
+            <img src="hwave.png" alt="Heatwave Icon">
+            <h3>Heatwave</h3>
+        </a>
+
+        <a href="IbfRainfall.html" class="card">
+            <img src="hrf.png" alt="Rainfall Icon">
+            <h3>Rainfall</h3>
+        </a>
+    </div>
+
+</body>
+</html>
