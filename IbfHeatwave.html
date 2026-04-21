@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>impact</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 16px;
+      background-color: #fefefe;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .form-group button:hover {
+      background-color: black;
+    }
+    .alert {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      white-space: pre-wrap;
+      border-radius: 6px;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    .button-group button {
+      width: 48%;
+      font-size: 14px;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .checkbox-group label {
+      display: inline-block;
+      margin-right: 20px;
+      margin-bottom: 10px;
+    }
+    footer {
+      position: fixed;
+      bottom: 12px;
+      right: 20px;
+      color: black;
+      font-weight: bold;
+      padding: 6px 12px;
+      letter-spacing: 1px;
+      font-size: 12px;
+          }
+  </style>
+</head>
+<body>
+  <form id="weatherAlertForm">
+    <div class="form-group checkbox-group">
+      <label>Districts</label><br>
+<label><input type="checkbox" name="district" value="Srikakulam">Srikakulam</label>
+<label><input type="checkbox" name="district" value="Parvathipuram Manyam">Parvathipuram Manyam</label>
+<label><input type="checkbox" name="district" value="Vizianagaram">Vizianagaram</label>
+<label><input type="checkbox" name="district" value="Visakhapatnam">Visakhapatnam</label> 
+<label><input type="checkbox" name="district" value="Alluri Sitharama Raju">Alluri Sitharama Raju</label>
+<label><input type="checkbox" name="district" value="Anakapalli">Anakapalli</label>
+<label><input type="checkbox" name="district" value="Kakinada-Yanam">Kakinada-Yanam</label>
+<label><input type="checkbox" name="district" value="Kakinada">Kakinada</label>
+<label><input type="checkbox" name="district" value="Yanam">Yanam</label>
+<label><input type="checkbox" name="district" value="Dr.B.R.Ambedkar Konaseema">Dr.B.R.Ambedkar Konaseema</label>
+<label><input type="checkbox" name="district" value="East Godavari">East Godavari</label>
+<label><input type="checkbox" name="district" value="West Godavari">West Godavari</label>
+<label><input type="checkbox" name="district" value="Eluru">Eluru</label>
+<label><input type="checkbox" name="district" value="NTR">NTR</label>
+<label><input type="checkbox" name="district" value="Krishna">Krishna</label>
+<label><input type="checkbox" name="district" value="Guntur">Guntur</label>
+<label><input type="checkbox" name="district" value="Palnadu">Palnadu</label>
+<label><input type="checkbox" name="district" value="Bapatla">Bapatla</label>
+<label><input type="checkbox" name="district" value="Prakasam">Prakasam</label>
+<label><input type="checkbox" name="district" value="Sri Potti Sriramulu Nellore">Sri Potti Sriramulu Nellore</label>
+<label><input type="checkbox" name="district" value="Chittoor">Chittoor</label>
+<label><input type="checkbox" name="district" value="Tirupati">Tirupati</label>
+<label><input type="checkbox" name="district" value="Annamayya">Annamayya</label>
+<label><input type="checkbox" name="district" value="YSR Kadapa">YSR Kadapa</label>
+<label><input type="checkbox" name="district" value="Kurnool">Kurnool</label>
+<label><input type="checkbox" name="district" value="Nandyal">Nandyal</label>
+<label><input type="checkbox" name="district" value="Sri Sathya Sai">Sri Sathya Sai</label>
+<label><input type="checkbox" name="district" value="Anantapuramu">Anantapuramu</label>
+</div>
+
+<div style="margin-top:10px;">
+  <button type="button" onclick="clearDistrictSelection()" style="background-color: red; color:white; padding:5px 10px;">Clear Selection</button>
+</div>
+
+    <div class="form-group">
+      <label for="Intensity">Intensity</label>
+      <select id="thunderstormIntensity" required>
+        <option value="">Select...</option>
+        <option value="Heat wave conditions">Heat wave</option> 
+        <option value="Severe Heat wave conditions">Severe Heat wave</option>         
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="Likelihood">Likelihood</label>
+      <select id="lightningLikelihood" required>
+        <option value="isolated">isolated</option>
+        <option value="a few">a few</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <button type="button" onclick="generateFirstAlert()">Generate Message</button>
+    </div>
+  </form>
+
+  <div id="alertWithoutEmails" class="alert" style="display: none;"></div>
+  <div id="teluguAlert" class="alert" style="display: none; background:#f4fff0; font-family:'Noto Sans Telugu', sans-serif;"></div>
+
+  <div class="button-group" id="firstAlertButtons" style="display: none;">
+    <button type="button" onclick="copyToClipboard('alertWithoutEmails')">Copy English Message</button>
+    <button type="button" onclick="copyToClipboard('teluguAlert')">Copy Telugu Message</button>
+  </div>
+
+  <footer><b>꧁<i>charan</i>꧂</b></footer>
+
+  <script>
+    const districtTelugu = {
+      "Srikakulam": "శ్రీకాకుళం",
+      "Parvathipuram Manyam": "పార్వతీపురం మన్యం",
+      "Vizianagaram": "విజయనగరం",
+      "Visakhapatnam": "విశాఖపట్నం",
+      "Alluri Sitharama Raju": "అల్లూరి సీతారామ రాజు",
+      "Anakapalli": "అనకాపల్లి",
+      "Kakinada-Yanam": "కాకినాడ-యానాం",
+      "Kakinada": "కాకినాడ",
+      "Yanam": "యానాం",
+      "Dr.B.R.Ambedkar Konaseema": "డాక్టర్ బి.ఆర్.అంబేద్కర్ కోనసీమ",
+      "East Godavari": "తూర్పు గోదావరి",
+      "West Godavari": "పశ్చిమ గోదావరి",
+      "Eluru": "ఏలూరు",
+      "NTR": "ఎన్టీఆర్",
+      "Krishna": "కృష్ణా",
+      "Guntur": "గుంటూరు",
+      "Palnadu": "పల్నాడు",
+      "Bapatla": "బాపట్ల",
+      "Prakasam": "ప్రకాశం",
+      "Sri Potti Sriramulu Nellore": "శ్రీ పొట్టి శ్రీరాములు నెల్లూరు",
+      "Chittoor": "చిత్తూరు",
+      "Tirupati": "తిరుపతి",
+      "Annamayya": "అన్నమయ్య",
+      "YSR Kadapa": "వైఎస్ఆర్ కడప",
+      "Kurnool": "కర్నూలు",
+      "Nandyal": "నంద్యాల",
+      "Sri Sathya Sai": "శ్రీ సత్య సాయి",
+      "Anantapuramu": "అనంతపురం"
+    };
+
+  function generateFirstAlert() {
+  const selectedDistricts = Array.from(document.querySelectorAll('input[name="district"]:checked')).map(el => el.value);
+  const thunderstormIntensity = document.getElementById('thunderstormIntensity').value;
+  const lightningLikelihood = document.getElementById('lightningLikelihood').value;
+
+  if (selectedDistricts.length === 0) {
+    alert("Please select at least one district.");
+    return;
+  }
+
+  // English message
+  let districtString = "";
+  if (selectedDistricts.length === 1) {
+    districtString = selectedDistricts[0];
+  } else if (selectedDistricts.length === 2) {
+    districtString = selectedDistricts.join(' and ');
+  } else {
+    districtString = selectedDistricts.slice(0, -1).join(', ') + ' and ' + selectedDistricts.slice(-1);
+  }
+
+  const districtWordEn = selectedDistricts.length === 1 ? "district" : "districts";
+  const alertMessage = `${thunderstormIntensity} likely at ${lightningLikelihood} places over the ${districtWordEn} of ${districtString}.`;
+
+  // Telugu message
+  const teluguIntensity = {
+    "Heat wave conditions": "వడగాలులు",
+    "Severe Heat wave conditions": "తీవ్ర వడగాలుల ",
+    }[thunderstormIntensity] || "";
+
+  const teluguLightning = {
+    "isolated": "ఒకటి లేదా రెండు",
+    "a few": "కొన్ని"
+  }[lightningLikelihood] || "";
+
+  const teluguDistricts = selectedDistricts.map(d => districtTelugu[d] || d);
+
+  let teluguDistrictString = "";
+  if (teluguDistricts.length === 1) {
+    teluguDistrictString = teluguDistricts[0];
+  } else if (teluguDistricts.length === 2) {
+    teluguDistrictString = teluguDistricts.join(' మరియు ');
+  } else {
+    teluguDistrictString = teluguDistricts.slice(0, -1).join(', ') + ' మరియు ' + teluguDistricts.slice(-1);
+  }
+
+  const districtWordTe = selectedDistricts.length === 1 ? "జిల్లాలో" : "జిల్లాల్లో";
+
+  const teluguMessage = `${teluguDistrictString} ${districtWordTe} ${teluguIntensity} ${teluguLightning} చోట్ల వీచే అవకాశముంది.`;
+
+  document.getElementById('alertWithoutEmails').textContent = alertMessage;
+  document.getElementById('alertWithoutEmails').style.display = 'block';
+
+  document.getElementById('teluguAlert').textContent = teluguMessage;
+  document.getElementById('teluguAlert').style.display = 'block';
+
+  document.getElementById('firstAlertButtons').style.display = 'flex';
+}
+    function copyToClipboard(elementId) {
+      const text = document.getElementById(elementId).textContent;
+      navigator.clipboard.writeText(text).then(() => alert("Copied to clipboard"));
+    }
+
+    function clearDistrictSelection() {
+      document.querySelectorAll('input[name="district"]:checked').forEach(cb => cb.checked = false);
+    }
+  </script>
+</body>
+</html>
