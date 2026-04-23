@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REDIRECT TO GMAIL</title>
+
+    <style>
+        body {
+            font-size: 26px;        
+            text-align: center;     
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+
+        select, input, button {
+            font-size: 20px;
+            padding: 8px 10px;
+            margin-top: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>MAIL REDIRECT</h1>
+
+    <form id="mailForm">
+
+        <label>Select Option:</label><br>
+        <select id="type">
+            <option value="ibf_heat">IBF – Heat Wave</option>
+            <option value="ibf_rain">IBF – Heavy Rainfall</option>
+             <option value="vaf">VAF AP</option>
+            <option value="state">State_AAB_Composite AP Bulletin</option>
+        </select>
+
+        <div id="bulletinField">
+            <label>Enter Bulletin Number:</label><br>
+            <input type="number" id="bulletinNo">
+        </div>
+
+        <button type="submit">Go to Gmail</button>
+    </form>
+
+<script>
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+
+    const dateSlash = `${day}/${month}/${year}`;
+    const dateDash = `${day}-${month}-${year}`;
+
+    const typeSelect = document.getElementById('type');
+    const bulletinField = document.getElementById('bulletinField');
+
+    function toggleField() {
+        if (typeSelect.value === 'vaf' || typeSelect.value === 'state') {
+            bulletinField.style.display = 'block';
+        } else {
+            bulletinField.style.display = 'none';
+        }
+    }
+
+    typeSelect.addEventListener('change', toggleField);
+    toggleField();
+
+    document.getElementById('mailForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const type = typeSelect.value;
+        let subject = "";
+        let body = "";
+        let to = "";
+
+        if (type === 'vaf') {
+            const bulletinNo = document.getElementById('bulletinNo').value;
+            if (!bulletinNo) return alert("Enter Bulletin Number");
+
+            subject = `Value_Added_AP_Forecast Bulletin No. ${bulletinNo} dated ${dateSlash}`;
+            body = `Dear Sir/ Madam,
+
+Kindly find the attachments of Value-added forecast Bulletin No. ${bulletinNo} dated ${dateDash} of Andhra Pradesh for your information.
+
+Please send your district advisory in English and Telugu Word formats before 4 pm.`;
+
+            to = `S STELLA IMD <mcamaravati.ws@imd.gov.in>,
+AMFU ANAKAPALLI <v.gouri@angrau.ac.in>,
+AMFU GUNTUR <m.ratnam@angrau.ac.in>,
+Stella S <samuelstella@yahoo.com>,
+ant amfu <arsatpamfu1996@gmail.com>,
+AMFU CHINTAPALLE <amfu.chintapalle.ap@gmail.com>,
+"Dr.malathi-pune-9850639842" <malathi.imd@gmail.com>,
+AMFU-ANANTAPURAM Anantapuram <amfuatp@gmail.com>,
+Bharati Sabade <bharatisabade@gmail.com>,
+Gowthami <gowthami.101290@gmail.com>,
+AMFU CHITTOOR tirupati <amfutirupati@gmail.com>`;
+
+        } else if (type === 'ibf_heat') {
+
+            subject = `Impact based forecast (IBF) for Heat Wave Warning issued on ${dateDash}`;
+            body = `Kindly find attached the Impact based forecast (IBF) for Heat Wave warning for Agriculture for the districts of Andhra Pradesh based on the forecast issued on ${dateDash}.
+
+Based on this IBF, an Advisory may be issued to Farmers and a copy (in word format) may be sent to this office.`;
+
+        } else if (type === 'ibf_rain') {
+
+            subject = `Impact based forecast (IBF) for Heavy Rainfall Warning issued on ${dateDash}`;
+            body = `Dear Sir / Madam,
+
+Kindly find attached the Impact based forecast (IBF) for Heavy rainfall warning for Agriculture for the districts of Andhra Pradesh based on the forecast issued on ${dateDash}.
+
+Based on this IBF, an Advisory may be issued to Farmers and a copy (in word format) may be sent to this office.`;
+
+        } else if (type === 'state') {
+
+            const bulletinNo = document.getElementById('bulletinNo').value;
+            if (!bulletinNo) return alert("Enter Bulletin Number");
+
+            subject = `State_AAB_Composite AP _ Bulletin no. ${bulletinNo} Dated ${dateDash}`;
+            body = `Dear Sir/Madam,
+
+Kindly find the attachment of APAgromet composite bulletin No.${bulletinNo} (English & Telugu) dated ${dateDash} (in pdf format) for your information.`;
+
+            to = `S STELLA IMD <mcamaravati.ws@imd.gov.in>,
+AMFU ANAKAPALLI <v.gouri@angrau.ac.in>,
+AMFU GUNTUR <m.ratnam@angrau.ac.in>,
+Stella S <samuelstella@yahoo.com>,
+ant amfu <arsatpamfu1996@gmail.com>,
+AMFU CHINTAPALLE <amfu.chintapalle.ap@gmail.com>,
+"Dr.malathi-pune-9850639842" <malathi.imd@gmail.com>,
+AMFU-ANANTAPURAM Anantapuram <amfuatp@gmail.com>,
+Bharati Sabade <bharatisabade@gmail.com>,
+Gowthami <gowthami.101290@gmail.com>,
+AMFU CHITTOOR tirupati <amfutirupati@gmail.com>`;
+        }
+
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        window.open(gmailUrl, '_blank');
+    });
+</script>
+</body>
+</html>
