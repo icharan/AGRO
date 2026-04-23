@@ -9,51 +9,31 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background-color: #f4f4f4;
         }
 
         h1 {
             text-align: center;
-            padding: 20px;
+            padding: 10px;
         }
 
         .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 10px;
         }
 
         .card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 10px;
             text-decoration: none;
             color: black;
-            transition: transform 0.2s;
+            border: 1px solid #ccc;
         }
 
         .card img {
-            width: 70px;
-            height: 70px;
-            margin-bottom: 10px;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-        }
-
-        @media (max-width: 500px) {
-            h1 {
-                font-size: 22px;
-            }
+            width: 50px;
+            height: 50px;
         }
     </style>
 </head>
@@ -65,22 +45,22 @@
 
         <a href="IbfHeatwave.html" class="card">
             <img src="hwave.png" alt="Heatwave Icon">
-            <h3>IBF Heatwave</h3>
+            <p>IBF Heatwave</p>
         </a>
 
-        <a href="FOUR3.html" class="card" target="_blank" rel="noopener noreferrer">
+        <a href="FOUR3.html" class="card" target="_blank">
             <img src="6.gif" alt="NAVTEX">
-            <h3>Gmail Redirect</h3>
+            <p>NAVTEX Change Chart LFC</p>
         </a>
 
-        <a href="DISTRICTS.html" class="card" target="_blank" rel="noopener noreferrer">
+        <a href="DISTRICTS.html" class="card" target="_blank">
             <img src="10.gif" alt="Districts Selector">
-            <h3>Districts Selector</h3>
+            <p>Districts Selector</p>
         </a>
 
         <a href="IbfRainfall.html" class="card">
             <img src="hrf.png" alt="Rainfall Icon">
-            <h3>IBF Heavy Rainfall</h3>
+            <p>IBF Heavy Rainfall</p>
         </a>
 
     </div>
